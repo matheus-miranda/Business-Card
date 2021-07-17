@@ -7,6 +7,7 @@
     tools:context=".ui.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cards"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -19,12 +20,14 @@
         tools:itemCount="8"
         tools:listitem="@layout/item_business_card" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:contentDescription="@string/add_card"
-        android:src="@drawable/ic_add"
+        android:text="@string/add_card"
+        app:icon="@drawable/ic_person_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
