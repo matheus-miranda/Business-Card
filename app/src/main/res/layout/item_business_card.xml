@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
+    app:layout_constraintDimensionRatio="16:9">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Matheus Silva Miranda" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_job_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            tools:text="Android Developer" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@id/tv_job_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_job_title"
+            tools:text="(19) 99999-8888" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@id/tv_phone"
+            app:layout_constraintTop_toBottomOf="@id/tv_phone"
+            tools:text="matheus@google.com" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Google" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="www.google.com" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
