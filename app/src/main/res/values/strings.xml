@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Business Card</string>
     <string name="add_card">Add Card</string>
+    <string name="new_card">New Card</string>
+    <string name="name">Name</string>
+    <string name="job_role">Job Role</string>
+    <string name="phone">Phone</string>
+    <string name="email">E-mail</string>
+    <string name="company_name">Company Name</string>
+    <string name="website">Website</string>
+    <string name="card_color">Card Color</string>
+    <string name="confirm">Confirm</string>
+    <string name="close">Close</string>
 </resources>

@@ -2,4 +2,14 @@
 <resources>
     <string name="app_name">Cartão de Visita</string>
     <string name="add_card">Novo Cartão</string>
+    <string name="new_card">Novo Cartão</string>
+    <string name="name">Nome</string>
+    <string name="job_role">Função</string>
+    <string name="phone">Telefone</string>
+    <string name="email">E-mail</string>
+    <string name="company_name">Nome da Empresa</string>
+    <string name="website">Website</string>
+    <string name="card_color">Cor do Cartão</string>
+    <string name="confirm">Confirmar</string>
+    <string name="close">Fechar</string>
 </resources>
