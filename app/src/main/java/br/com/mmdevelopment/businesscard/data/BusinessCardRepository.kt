@@ -6,7 +6,11 @@ import kotlinx.coroutines.runBlocking
 
 class BusinessCardRepository(private val dao: BusinessCardDao) {
 
-    fun getAll() = dao.getAll()
+    fun getAll() = runBlocking {
+     launch(Dispatchers.IO) {
+         dao.getAll()
+     }
+    }
 
     fun insert(businessCard: BusinessCard) = runBlocking {
         launch(Dispatchers.IO) {
@@ -14,5 +18,9 @@ class BusinessCardRepository(private val dao: BusinessCardDao) {
         }
     }
 
-    fun delete(businessCard: BusinessCard) = dao.delete(businessCard)
+    fun delete(businessCard: BusinessCard) = runBlocking {
+        launch(Dispatchers.IO) {
+            dao.delete(businessCard)
+        }
+    }
 }

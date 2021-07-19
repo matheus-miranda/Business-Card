@@ -7,11 +7,11 @@ import androidx.room.*
 interface BusinessCardDao {
 
     @Query("SELECT * FROM BusinessCard")
-    fun getAll(): LiveData<List<BusinessCard>>
+    suspend fun getAll(): LiveData<List<BusinessCard>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(businessCard: BusinessCard)
 
     @Delete
-    fun delete(businessCard: BusinessCard)
+    suspend fun delete(businessCard: BusinessCard)
 }
