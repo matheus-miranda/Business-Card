@@ -11,4 +11,6 @@
     <string name="card_color">Card Color</string>
     <string name="confirm">Confirm</string>
     <string name="close">Close</string>
+    <!-- ColorSheet -->
+    <string name="pick_a_color">Pick a color</string>
 </resources>
