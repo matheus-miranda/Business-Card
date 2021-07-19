@@ -13,7 +13,7 @@ class AddBusinessCardActivity : AppCompatActivity() {
     }
 
     private val binding by lazy { ActivityAddBusinessCardBinding.inflate(layoutInflater) }
-    private var selectedColor: Int = ColorSheet.NO_COLOR
+    private var mSelectedColor: Int = ColorSheet.NO_COLOR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,13 +24,13 @@ class AddBusinessCardActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(COLOR_SELECTED, selectedColor)
+        outState.putInt(COLOR_SELECTED, mSelectedColor)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        selectedColor = savedInstanceState.getInt(COLOR_SELECTED)
-        binding.tilColor.boxBackgroundColor = selectedColor
+        mSelectedColor = savedInstanceState.getInt(COLOR_SELECTED)
+        binding.tilColor.boxBackgroundColor = mSelectedColor
     }
 
     /**
@@ -54,9 +54,9 @@ class AddBusinessCardActivity : AppCompatActivity() {
         ColorSheet().colorPicker(
             colors = colors,
             noColorOption = true,
-            selectedColor = selectedColor,
+            selectedColor = mSelectedColor,
             listener = { color ->
-                selectedColor = color
+                mSelectedColor = color
                 binding.tilColor.boxBackgroundColor = color
                 //val hexColor = ColorSheetUtils.colorToHex(color)
             })
