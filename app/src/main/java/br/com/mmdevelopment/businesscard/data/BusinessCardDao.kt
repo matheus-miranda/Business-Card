@@ -9,6 +9,9 @@ interface BusinessCardDao {
     @Query("SELECT * FROM BusinessCard")
     fun getAll(): LiveData<List<BusinessCard>>
 
+    @Query("SELECT * FROM BusinessCard WHERE ID = :id")
+    suspend fun findById(id: Int): BusinessCard
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(businessCard: BusinessCard)
 

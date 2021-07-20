@@ -10,6 +10,8 @@ class MainViewModel(private val cardRepository: BusinessCardRepository) : ViewMo
 
     fun getAll(): LiveData<List<BusinessCard>> = cardRepository.getAll()
 
+    fun findById(id: Int) = cardRepository.findById(id)
+
     fun insert(businessCard: BusinessCard) = cardRepository.insert(businessCard)
 
     fun delete(businessCard: BusinessCard) = cardRepository.delete(businessCard)

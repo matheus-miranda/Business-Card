@@ -8,6 +8,12 @@ class BusinessCardRepository(private val dao: BusinessCardDao) {
 
     fun getAll() = dao.getAll()
 
+    fun findById(cardId: Int) = runBlocking {
+        launch(Dispatchers.IO) {
+            dao.findById(cardId)
+        }
+    }
+
     fun insert(businessCard: BusinessCard) = runBlocking {
         launch(Dispatchers.IO) {
             dao.insert(businessCard)
