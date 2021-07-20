@@ -1,9 +1,13 @@
 package br.com.mmdevelopment.businesscard.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import br.com.mmdevelopment.businesscard.App
 import br.com.mmdevelopment.businesscard.R
+import br.com.mmdevelopment.businesscard.data.BusinessCard
 import br.com.mmdevelopment.businesscard.databinding.ActivityAddBusinessCardBinding
+import br.com.mmdevelopment.businesscard.extensions.text
 import dev.sasikanth.colorsheet.ColorSheet
 
 class AddBusinessCardActivity : AppCompatActivity() {
@@ -14,6 +18,9 @@ class AddBusinessCardActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityAddBusinessCardBinding.inflate(layoutInflater) }
     private var mSelectedColor: Int = ColorSheet.NO_COLOR
+    private val mainViewModel: MainViewModel by viewModels {
+        MainViewModelFactory((application as App).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +49,17 @@ class AddBusinessCardActivity : AppCompatActivity() {
         binding.tilColor.editText?.setOnClickListener { setColorPicker() }
 
         binding.btnConfirm.setOnClickListener {
-
+            val businessCard = BusinessCard(
+                name = binding.tilName.text,
+                jobRole = binding.tilRole.text,
+                phone = binding.tilPhone.text,
+                email = binding.tilEmail.text,
+                company = binding.tilCompany.text,
+                website = binding.tilWebsite.text,
+                cardColor = mSelectedColor
+            )
+            mainViewModel.insert(businessCard)
+            finish()
         }
     }
 
