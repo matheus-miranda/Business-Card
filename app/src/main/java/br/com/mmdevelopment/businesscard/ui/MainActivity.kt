@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import br.com.mmdevelopment.businesscard.App
 import br.com.mmdevelopment.businesscard.adapters.BusinessCardAdapter
 import br.com.mmdevelopment.businesscard.data.BusinessCard
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.rvCards.adapter = adapter
+        rvScrollListener()
         getAllBusinessCards()
         insertListeners()
     }
@@ -43,6 +45,32 @@ class MainActivity : AppCompatActivity() {
     private fun getAllBusinessCards() {
         mainViewModel.getAll().observe(this, { businessCards ->
             adapter.submitList(businessCards)
+        })
+    }
+
+    /**
+     * Adds collapsing behavior for FAB when scrolling the RecyclerView
+     */
+    private fun rvScrollListener() {
+        binding.rvCards.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                // Scroll down
+                if (dy > 20 && binding.fabAdd.isExtended) {
+                    binding.fabAdd.shrink()
+                }
+
+                // Scroll up
+                if (dy < -20 && !binding.fabAdd.isExtended) {
+                    binding.fabAdd.extend()
+                }
+
+                // At the top
+                if (!recyclerView.canScrollVertically(-1)) {
+                    binding.fabAdd.extend()
+                }
+            }
         })
     }
 
