@@ -8,6 +8,6 @@ import br.com.mmdevelopment.businesscard.data.BusinessCardRepository
  * This class will run when our app starts
  */
 class App : Application() {
-    val database by lazy { AppDatabase.getDatabase(this) }
+    private val database by lazy { AppDatabase.getDatabase(this) }
     val repository by lazy { BusinessCardRepository(database.businessCardDao()) }
 }
