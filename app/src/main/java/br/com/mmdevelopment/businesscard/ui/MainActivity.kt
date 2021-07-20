@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import br.com.mmdevelopment.businesscard.App
+import br.com.mmdevelopment.businesscard.adapters.BusinessCardAdapter
+import br.com.mmdevelopment.businesscard.data.BusinessCard
 import br.com.mmdevelopment.businesscard.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,11 +15,13 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels {
         MainViewModelFactory((application as App).repository)
     }
+    private val adapter by lazy { BusinessCardAdapter { clickedListItem(it) } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.rvCards.adapter = adapter
         getAllBusinessCards()
         insertListeners()
     }
@@ -38,7 +42,14 @@ class MainActivity : AppCompatActivity() {
      */
     private fun getAllBusinessCards() {
         mainViewModel.getAll().observe(this, { businessCards ->
-
+            adapter.submitList(businessCards)
         })
+    }
+
+    /**
+     * Handles the click on a RV item
+     */
+    private fun clickedListItem(card: BusinessCard) {
+        // When the user clicks a list item
     }
 }
