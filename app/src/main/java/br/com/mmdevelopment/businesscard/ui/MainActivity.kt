@@ -2,13 +2,13 @@ package br.com.mmdevelopment.businesscard.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.com.mmdevelopment.businesscard.App
 import br.com.mmdevelopment.businesscard.adapters.BusinessCardAdapter
 import br.com.mmdevelopment.businesscard.databinding.ActivityMainBinding
+import br.com.mmdevelopment.businesscard.util.Image
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,12 +40,12 @@ class MainActivity : AppCompatActivity() {
 
         // Single click handler for cards
         adapter.onSingleClickHandler = { card->
-            Toast.makeText(this, "Short click", Toast.LENGTH_SHORT).show()
+
         }
 
         // Long click handler for cards
         adapter.onLongClickHandler = { card->
-            Toast.makeText(this, "Long click", Toast.LENGTH_SHORT).show()
+            Image.share(this@MainActivity, card )
         }
     }
 
