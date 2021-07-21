@@ -2,12 +2,12 @@ package br.com.mmdevelopment.businesscard.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.com.mmdevelopment.businesscard.App
 import br.com.mmdevelopment.businesscard.adapters.BusinessCardAdapter
-import br.com.mmdevelopment.businesscard.data.BusinessCard
 import br.com.mmdevelopment.businesscard.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,15 +16,15 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels {
         MainViewModelFactory((application as App).repository)
     }
-    private val adapter by lazy { BusinessCardAdapter { clickedListItem(it) } }
+    private val adapter by lazy { BusinessCardAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         binding.rvCards.adapter = adapter
-        rvScrollListener()
         getAllBusinessCards()
+        fabBehaviorRvScroll()
         insertListeners()
     }
 
@@ -36,6 +36,16 @@ class MainActivity : AppCompatActivity() {
             Intent(this, AddBusinessCardActivity::class.java).also {
                 startActivity(it)
             }
+        }
+
+        // Single click handler for cards
+        adapter.onSingleClickHandler = { card->
+            Toast.makeText(this, "Short click", Toast.LENGTH_SHORT).show()
+        }
+
+        // Long click handler for cards
+        adapter.onLongClickHandler = { card->
+            Toast.makeText(this, "Long click", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -51,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * Adds collapsing behavior for FAB when scrolling the RecyclerView
      */
-    private fun rvScrollListener() {
+    private fun fabBehaviorRvScroll() {
         binding.rvCards.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -72,12 +82,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-    }
-
-    /**
-     * Handles the click on a RV item
-     */
-    private fun clickedListItem(card: BusinessCard) {
-        // When the user clicks a list item
     }
 }

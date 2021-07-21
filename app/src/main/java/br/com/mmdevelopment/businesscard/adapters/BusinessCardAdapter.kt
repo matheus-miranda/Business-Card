@@ -1,6 +1,7 @@
 package br.com.mmdevelopment.businesscard.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -8,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.mmdevelopment.businesscard.data.BusinessCard
 import br.com.mmdevelopment.businesscard.databinding.ItemBusinessCardBinding
 
-class BusinessCardAdapter(private val clickHandler: (BusinessCard) -> Unit) :
+class BusinessCardAdapter :
     ListAdapter<BusinessCard, BusinessCardAdapter.CardViewHolder>(DiffCallBack()) {
+
+    var onSingleClickHandler: (View) -> Unit = {}
+    var onLongClickHandler: (View) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val inflater =
@@ -19,7 +23,6 @@ class BusinessCardAdapter(private val clickHandler: (BusinessCard) -> Unit) :
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         holder.bind(getItem(position))
-        holder.itemView.setOnClickListener { clickHandler(getItem(position)) }
     }
 
     inner class CardViewHolder(private val binding: ItemBusinessCardBinding) :
@@ -33,6 +36,14 @@ class BusinessCardAdapter(private val clickHandler: (BusinessCard) -> Unit) :
             binding.tvCompany.text = item.company
             binding.tvWebsite.text = item.website
             binding.mcvContent.setBackgroundColor(item.cardColor)
+
+            binding.mcvContent.setOnClickListener {
+                onSingleClickHandler(it)
+            }
+            binding.mcvContent.setOnLongClickListener {
+                onLongClickHandler(it)
+                true
+            }
         }
     }
 }
