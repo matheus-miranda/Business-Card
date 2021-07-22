@@ -9,6 +9,7 @@ import br.com.mmdevelopment.businesscard.App
 import br.com.mmdevelopment.businesscard.adapters.BusinessCardAdapter
 import br.com.mmdevelopment.businesscard.databinding.ActivityMainBinding
 import br.com.mmdevelopment.businesscard.util.Image
+import com.littlemango.stacklayoutmanager.StackLayoutManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,10 +23,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.rvCards.adapter = adapter
+        initRV()
         getAllBusinessCards()
         fabBehaviorRvScroll()
         insertListeners()
+    }
+
+    /**
+     * Define Recycler View layout manager
+     */
+    private fun initRV() {
+        val orientation = StackLayoutManager.ScrollOrientation.BOTTOM_TO_TOP
+        val manager = StackLayoutManager(orientation, 4)
+        binding.rvCards.layoutManager = manager
+        binding.rvCards.adapter = adapter
     }
 
     /**
