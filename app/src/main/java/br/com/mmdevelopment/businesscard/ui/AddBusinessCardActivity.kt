@@ -1,7 +1,6 @@
 package br.com.mmdevelopment.businesscard.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +18,7 @@ class AddBusinessCardActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels {
         MainViewModelFactory((application as App).repository)
     }
+    private lateinit var mCardFromExtras: BusinessCard
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +37,8 @@ class AddBusinessCardActivity : AppCompatActivity() {
             binding.etTitle.text = getString(R.string.edit_card)
             val cardId = intent.getIntExtra(CARD_ID, 0)
 
-            mainViewModel.findById(cardId)?.let {
-                Log.e("Card", it.toString())
+            mainViewModel.findById(cardId).let {
+                mCardFromExtras = it
                 binding.apply {
                     tilName.text = it.name
                     tilRole.text = it.jobRole
@@ -47,6 +47,7 @@ class AddBusinessCardActivity : AppCompatActivity() {
                     tilCompany.text = it.company
                     tilWebsite.text = it.website
                     tilColor.boxBackgroundColor = it.cardColor
+                    mSelectedColor = it.cardColor
                 }
             }
 
@@ -84,6 +85,11 @@ class AddBusinessCardActivity : AppCompatActivity() {
                 id = intent.getIntExtra(CARD_ID, 0)
             )
             mainViewModel.insert(businessCard)
+            finish()
+        }
+
+        binding.btnDelete.setOnClickListener {
+            mainViewModel.delete(mCardFromExtras)
             finish()
         }
     }
