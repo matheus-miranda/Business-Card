@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         initRV()
         getAllBusinessCards()
-        fabBehaviorRvScroll()
+        //fabBehaviorRvScroll()
         insertListeners()
     }
 
