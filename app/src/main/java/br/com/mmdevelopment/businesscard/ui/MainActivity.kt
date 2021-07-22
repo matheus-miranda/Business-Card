@@ -39,13 +39,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Single click handler for cards
-        adapter.onSingleClickHandler = { card->
-
+        adapter.onSingleClickHandler = { card ->
+            Intent(this, AddBusinessCardActivity::class.java).also {
+                it.putExtra(AddBusinessCardActivity.CARD_ID, card.id)
+                startActivity(it)
+            }
         }
 
         // Long click handler for cards
-        adapter.onLongClickHandler = { card->
-            Image.share(this@MainActivity, card )
+        adapter.onLongClickHandler = { listItem ->
+            Image.share(this@MainActivity, listItem)
         }
     }
 

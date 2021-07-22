@@ -14,4 +14,6 @@
     <!-- ColorSheet -->
     <string name="pick_a_color">Pick a color</string>
     <string name="share">Share</string>
+    <string name="delete">Delete</string>
+    <string name="edit_card">Edit Card</string>
 </resources>

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class BusinessCard(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
     val jobRole: String,
     val phone: String,

@@ -30,6 +30,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="New Card" />
 
+    <ImageButton
+        android:id="@+id/btn_delete"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="?attr/actionBarItemBackground"
+        android:contentDescription="@string/delete"
+        android:src="@drawable/ic_delete"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/accent_variant"
+        tools:visibility="visible" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

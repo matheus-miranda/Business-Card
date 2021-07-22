@@ -12,7 +12,7 @@ import br.com.mmdevelopment.businesscard.databinding.ItemBusinessCardBinding
 class BusinessCardAdapter :
     ListAdapter<BusinessCard, BusinessCardAdapter.CardViewHolder>(DiffCallBack()) {
 
-    var onSingleClickHandler: (View) -> Unit = {}
+    var onSingleClickHandler: (BusinessCard) -> Unit = {}
     var onLongClickHandler: (View) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
@@ -38,10 +38,10 @@ class BusinessCardAdapter :
             binding.mcvContent.setBackgroundColor(item.cardColor)
 
             binding.mcvContent.setOnClickListener {
-                onSingleClickHandler(it)
+                onSingleClickHandler(item) // passes the actual business card
             }
             binding.mcvContent.setOnLongClickListener {
-                onLongClickHandler(it)
+                onLongClickHandler(it) // passes the individual list item
                 true
             }
         }

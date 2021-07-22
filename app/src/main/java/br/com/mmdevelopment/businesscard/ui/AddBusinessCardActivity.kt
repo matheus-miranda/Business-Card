@@ -1,6 +1,8 @@
 package br.com.mmdevelopment.businesscard.ui
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import br.com.mmdevelopment.businesscard.App
@@ -12,10 +14,6 @@ import dev.sasikanth.colorsheet.ColorSheet
 
 class AddBusinessCardActivity : AppCompatActivity() {
 
-    companion object {
-        private const val COLOR_SELECTED = "selectedColor"
-    }
-
     private val binding by lazy { ActivityAddBusinessCardBinding.inflate(layoutInflater) }
     private var mSelectedColor: Int = ColorSheet.NO_COLOR
     private val mainViewModel: MainViewModel by viewModels {
@@ -26,7 +24,33 @@ class AddBusinessCardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        getExtra()
         insertListeners()
+    }
+
+    /**
+     * If user clicked on a card, populate the fields and allow editing/deletion
+     */
+    private fun getExtra() {
+        if (intent.hasExtra(CARD_ID)) {
+            binding.btnDelete.visibility = View.VISIBLE
+            binding.etTitle.text = getString(R.string.edit_card)
+            val cardId = intent.getIntExtra(CARD_ID, 0)
+
+            mainViewModel.findById(cardId)?.let {
+                Log.e("Card", it.toString())
+                binding.apply {
+                    tilName.text = it.name
+                    tilRole.text = it.jobRole
+                    tilPhone.text = it.phone
+                    tilEmail.text = it.email
+                    tilCompany.text = it.company
+                    tilWebsite.text = it.website
+                    tilColor.boxBackgroundColor = it.cardColor
+                }
+            }
+
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -56,7 +80,8 @@ class AddBusinessCardActivity : AppCompatActivity() {
                 email = binding.tilEmail.text,
                 company = binding.tilCompany.text,
                 website = binding.tilWebsite.text,
-                cardColor = mSelectedColor
+                cardColor = mSelectedColor,
+                id = intent.getIntExtra(CARD_ID, 0)
             )
             mainViewModel.insert(businessCard)
             finish()
@@ -78,5 +103,10 @@ class AddBusinessCardActivity : AppCompatActivity() {
                 //val hexColor = ColorSheetUtils.colorToHex(color)
             })
             .show(supportFragmentManager)
+    }
+
+    companion object {
+        private const val COLOR_SELECTED = "selectedColor"
+        const val CARD_ID = "cardId"
     }
 }

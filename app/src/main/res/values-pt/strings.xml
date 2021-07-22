@@ -14,4 +14,6 @@
     <string name="close">Fechar</string>
     <string name="pick_a_color">Selecione uma cor</string>
     <string name="share">Compartilhar</string>
+    <string name="delete">Deletar</string>
+    <string name="edit_card">Editar Cartão</string>
 </resources>
