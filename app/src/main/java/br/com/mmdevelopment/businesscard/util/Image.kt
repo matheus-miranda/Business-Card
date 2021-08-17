@@ -11,10 +11,14 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import androidx.core.content.FileProvider
 import br.com.mmdevelopment.businesscard.R
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
+
+
+
 
 class Image {
 
@@ -54,7 +58,13 @@ class Image {
                 // Devices < Q
                 val imagesDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
                 val image = File(imagesDir, filename)
-                shareIntent(context, Uri.fromFile(image))
+                val imageUri = FileProvider.getUriForFile(
+                    context,
+                    "br.com.mmdevelopment.businesscard.provider",  //(use your app signature + ".provider" )
+                    image
+                )
+                //shareIntent(context, Uri.fromFile(image))
+                shareIntent(context, imageUri)
                 fos = FileOutputStream(image)
             }
 
